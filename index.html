@@ -1,0 +1,203 @@
+<!-- PAGE HTML POUR WINDOWS -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étudiant Planner - Windows</title>
+<!-- Tailwind CSS pour un beau design -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.windows-card {
+border: 1px solid #e5e7eb;
+border-radius: 0.75rem;
+background: white;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.btn-windows {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+padding: 0.75rem 1.5rem;
+border-radius: 0.5rem;
+font-weight: bold;
+cursor: pointer;
+}
+.btn-windows:hover {
+opacity: 0.9;
+}
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<!-- Navigation -->
+<nav class="bg-white shadow-md">
+<div class="max-w-6xl mx-auto px-4 py-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="bg-blue-100 p-2 rounded">
+<span class="text-blue-600 font-bold">🎓</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-gray-800">Étudiant Planner</h1>
+<p class="text-xs text-gray-500">Windows Edition - DTS Project</p>
+</div>
+</div>
+<div class="text-sm text-gray-600">
+Déployé sur <span class="font-bold text-blue-600">Render.com</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Contenu principal -->
+<main class="max-w-6xl mx-auto px-4 py-8">
+<!-- En-tête -->
+<div class="windows-card p-8 mb-8">
+<h1 class="text-3xl font-bold text-gray-800 mb-4">
+Bienvenue sur Étudiant Planner
+</h1>
+<p class="text-gray-600 mb-6">
+Une application Windows développée par une étudiante en DTS,
+déployée sur <strong>Render.com (Platform as a Service)</strong>.
+</p>
+<div class="flex flex-wrap gap-4">
+<button onclick="testAPI()" class="btn-windows">
+🚀 Tester l'API PaaS
+</button>
+<button onclick="showCours()" class="bg-gray-200 text-gray-800 px-6 py-3
+rounded-lg font-bold">
+📅 Voir mes cours
+</button>
+<button onclick="showPaaSInfo()" class="bg-green-500 text-white px-6 py-3
+rounded-lg font-bold">
+💡 Info PaaS
+</button>
+</div>
+</div>
+<!-- Résultats -->
+<div id="results" class="windows-card p-6 mb-8">
+<h2 class="text-xl font-bold mb-4">📊 Résultats des tests</h2>
+<div id="api-result" class="hidden p-4 mb-4 bg-gray-50 rounded">
+<!-- Rempli par JavaScript -->
+</div>
+<div id="cours-result" class="hidden">
+<!-- Rempli par JavaScript -->
+</div>
+</div>
+<!-- Section PaaS (pour votre exposé) -->
+<div class="windows-card p-6 bg-gradient-to-r from-blue-50 to-purple-50">
+<h2 class="text-xl font-bold mb-4">🎯 Pour votre exposé sur le PaaS</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-4 bg-white rounded-lg">
+<h3 class="font-bold text-blue-700 mb-2">Sans PaAS (Windows
+traditionnel)</h3>
+<ul class="list-disc pl-5 text-gray-700 text-sm">
+<li>Installer WAMP/XAMPP</li>
+<li>Configurer PHP/MySQL</li>
+<li>Gérer les ports Windows</li>
+<li>Problèmes de compatibilité</li>
+<li>Pas accessible depuis l'extérieur</li>
+</ul>
+</div>
+<div class="p-4 bg-white rounded-lg">
+<h3 class="font-bold text-green-700 mb-2">Avec PaaS (Render.com)</h3>
+<ul class="list-disc pl-5 text-gray-700 text-sm">
+<li>Code → GitHub → Render</li>
+<li>PostgreSQL inclus gratuitement</li>
+<li>HTTPS automatique</li>
+<li>Accessible partout</li>
+<li>Zéro configuration serveur</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-6 mt-8">
+<div class="max-w-6xl mx-auto px-4 text-center">
+<p>Développé sur <strong>Windows</strong> par [Votre Nom] - Étudiante DTS</p>
+<p class="text-gray-400 text-sm mt-2">
+Application déployée sur Render.com • Code sur GitHub • Pour l'exposé PaaS
+</p>
+</div>
+</footer>
+<!-- JavaScript -->
+<script>
+// Test de l'API
+async function testAPI() {
+try {
+const response = await fetch('/api/test');
+const data = await response.json();
+document.getElementById('api-result').innerHTML = `
+<div class="bg-green-100 border border-green-300 p-4 rounded">
+<div class="flex items-center">
+<span class="text-2xl mr-3">✅</span>
+<div>
+<h4 class="font-bold text-green-800">API PaaS Fonctionnelle !</h4>
+<p class="text-green-700">${data.message}</p>
+<p class="text-sm mt-2">
+<strong>Système:</strong> ${data.os} |
+<strong>PaaS:</strong> ${data.paas} |
+<strong>Étudiante:</strong> ${data.student}
+</p>
+</div>
+</div>
+</div>
+`;
+document.getElementById('api-result').classList.remove('hidden');
+} catch (error) {
+document.getElementById('api-result').innerHTML = `
+<div class="bg-red-100 border border-red-300 p-4 rounded">
+<div class="flex items-center">
+<span class="text-2xl mr-3">❌</span>
+<div>
+<h4 class="font-bold text-red-800">Erreur API</h4>
+<p>${error.message}</p>
+<p class="text-sm mt-2">Vérifiez que le serveur tourne</p>
+</div>
+</div>
+</div>
+`;
+document.getElementById('api-result').classList.remove('hidden');
+}
+}
+// Montrer les cours (simulation)
+function showCours() {
+const cours = [
+{ nom: 'Algorithmique', jour: 'Lundi', heure: '8h30-10h30' },
+{ nom: 'Base de données', jour: 'Mardi', heure: '10h-12h' },
+{ nom: 'Projet PaaS', jour: 'Mercredi', heure: '14h-16h' }
+];
+let html = '<h3 class="font-bold mb-3">📚 Mes cours cette semaine:</h3>';
+cours.forEach(c => {
+html += `
+<div class="border-l-4 border-blue-500 pl-4 py-2 mb-2 bg-blue-50">
+<div class="font-medium">${c.nom}</div>
+<div class="text-sm text-gray-600">${c.jour} • ${c.heure}</div>
+</div>
+`;
+});
+document.getElementById('cours-result').innerHTML = html;
+document.getElementById('cours-result').classList.remove('hidden');
+}
+// Info PaaS
+function showPaaSInfo() {
+alert(`🎓 POUR VOTRE EXPOSÉ PAAS :
+AVANT (sans PaaS):
+• Installer Apache/Node.js sur Windows
+• Configurer PostgreSQL manuellement
+• Gérer le pare-feu Windows
+• Pas d'URL publique
+MAINTENANT (avec Render.com PaaS):
+1. J'écris mon code JavaScript
+2. Je pousse sur GitHub
+3. Render.com déploie automatiquement
+4. Mon app est en ligne: https://mon-app.onrender.com
+→ ZERO configuration serveur
+→ PostgreSQL gratuit inclus
+→ HTTPS automatique
+→ Accessible partout dans le monde
+C'est ça, le Platform as a Service !`);
+}
+</script>
+</body>
+</html>
